@@ -1,20 +1,29 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import s from './Counter.module.css'
 
 type CounterPropsType = {
-    count: number
+    count: number | boolean
+    startNum: number
+    maxNum: number
+    displayMessage: string
+    children: ReactNode
+    error: string
 }
 
 export const Counter: React.FC<CounterPropsType> = ({
-    count
+    count,
+    maxNum,
+    children,
+    error
 }) => {
 
-    const finalCountClassName = `${count === 5 ? s.counter_title : s.counter_default}`
+    const finalCountClassName = `${s.counter_default} 
+    ${count === maxNum || error ? s.counter_title : ''}`
 
     return (
         <div className={s.counter}>
             <p className={finalCountClassName}>
-                {count}
+                {children}
             </p>
         </div>
     );
