@@ -7,9 +7,10 @@ type SettingsPropsType = {
     startNum: number
     setMaxNum: (maxNum: number) => void
     maxNum: number
-    error: string
-    displaySettingMessage: (isDisplay: boolean) => void
-    message : string
+    error: boolean
+    displaySettingMessage: (isSettingMode: boolean) => void
+    editMode: boolean
+    setCount:(count: number) => void
 }
 
 export const Settings = (props: SettingsPropsType) => {
@@ -24,15 +25,16 @@ export const Settings = (props: SettingsPropsType) => {
     }
     const onPressSetHandler = () => {
         props.displaySettingMessage(false)
+        props.setCount(props.startNum)
+
     }
 
-    let finalInputClassName = `${s.settings_input} 
-    ${props.error ? s.error_input : ''}`
+    let finalInputClassName = `${s.settings_input} ${props.error ? s.error_input : ''}`
 
     return (
         <>
             <div onFocus={onFocusHandler}
-                className={s.settings_block}>
+                 className={s.settings_block}>
                 <div className={s.input_block}>
                     Max value
                     <input value={props.maxNum}
@@ -51,7 +53,7 @@ export const Settings = (props: SettingsPropsType) => {
             <div className={s.settings_btn_wrapper}>
                 <SuperButton name={'Set'}
                              callback={onPressSetHandler}
-                             disabled={!!props.error || !props.message}/>
+                             disabled={!props.editMode || props.error}/>
             </div>
         </>
     );

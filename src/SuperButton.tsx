@@ -13,14 +13,12 @@ type SuperButtonPropsType = {
      disabled
  }) => {
 
-    const onClickHandler = () => {
-        callback()
-    }
-
     const finalBtnClassName = `${s.button} ${disabled? s.disabled : ''}`
 
     return (
-        <button disabled={disabled} className={finalBtnClassName} onClick={onClickHandler}>{name}</button>
+        <button disabled={disabled}
+                className={finalBtnClassName}
+                onClick={()=>callback()}>{name}</button>
     );
 };
 
