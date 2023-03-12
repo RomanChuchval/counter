@@ -1,7 +1,9 @@
+import {SET_START_VALUE, setStartValueAC} from "./counter-reducer";
+
 type ActionsType =
     ReturnType<typeof changeMaxValueAC>
-    | ReturnType<typeof changeStartValueAC>
     | ReturnType<typeof isDisplaySettingMessageAC>
+    | ReturnType<typeof setStartValueAC>
 
 export type SettingsStateType = {
     maxNum: number
@@ -18,8 +20,8 @@ export const settingsReducer = (state: SettingsStateType = initialState, action:
     switch (action.type) {
         case CHANGE_MAX_VALUE:
             return {...state, maxNum: action.payload.maxValue}
-        case CHANGE_START_VALUE:
-            return {...state, startNum: action.payload.startValue}
+        case SET_START_VALUE:
+                return {...state, startNum: action.payload.startValue}
         case IS_DISPLAY_SETTING_MESSAGE:
             return {...state, isEditMode: action.payload.isDisplay}
         default:
@@ -28,7 +30,6 @@ export const settingsReducer = (state: SettingsStateType = initialState, action:
 }
 
 const CHANGE_MAX_VALUE = 'CHANGE_MAX_VALUE'
-const CHANGE_START_VALUE = 'CHANGE_START_VALUE'
 const IS_DISPLAY_SETTING_MESSAGE = 'IS_DISPLAY_SETTING_MESSAGE'
 
 export const changeMaxValueAC = (maxValue: number) => {
@@ -36,15 +37,6 @@ export const changeMaxValueAC = (maxValue: number) => {
         type: CHANGE_MAX_VALUE,
         payload: {
             maxValue
-        }
-    } as const
-}
-
-export const changeStartValueAC = (startValue: number) => {
-    return {
-        type: CHANGE_START_VALUE,
-        payload: {
-            startValue
         }
     } as const
 }

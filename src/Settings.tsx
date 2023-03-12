@@ -5,21 +5,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./redux/store";
 import {
     changeMaxValueAC,
-    changeStartValueAC,
     isDisplaySettingMessageAC,
     SettingsStateType
 } from "./redux/settings-reducer";
-import {resetCounterToStartValueAC, setStartValueAC} from "./redux/counter-reducer";
+import {setStartValueAC} from "./redux/counter-reducer";
 
 type SettingsPropsType = {
-    // setStartNum: (startNum: number) => void
-    // startNum: number
-    // setMaxNum: (maxNum: number) => void
-    // maxNum: number
     error: boolean
-    // displaySettingMessage: (isSettingMode: boolean) => void
-    // editMode: boolean
-    // setCount:(count: number) => void
 }
 
 export const Settings = (props: SettingsPropsType) => {
@@ -31,7 +23,6 @@ export const Settings = (props: SettingsPropsType) => {
         dispatch(changeMaxValueAC(e.currentTarget.valueAsNumber))
     }
     const onChangeStartValue = (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(changeStartValueAC(e.currentTarget.valueAsNumber))
         dispatch(setStartValueAC(e.currentTarget.valueAsNumber))
     }
     const onFocusHandler = () => {
@@ -39,7 +30,7 @@ export const Settings = (props: SettingsPropsType) => {
     }
     const onPressSetHandler = () => {
         dispatch(isDisplaySettingMessageAC(false))
-        dispatch(resetCounterToStartValueAC(settingsState.startNum))
+        dispatch(setStartValueAC(settingsState.startNum))
     }
 
     let finalInputClassName = `${s.settings_input} ${props.error ? s.error_input : ''}`

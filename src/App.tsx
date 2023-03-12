@@ -6,7 +6,7 @@ import {SettingsContainer} from "./Settings";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./redux/store";
 import {SettingsStateType} from "./redux/settings-reducer";
-import {CounterStateType, incrementAC, resetCounterToStartValueAC} from "./redux/counter-reducer";
+import {CounterStateType, incrementAC, setStartValueAC} from "./redux/counter-reducer";
 
 
 function App() {
@@ -17,15 +17,16 @@ function App() {
 
 
     const error = settingsState.startNum >= settingsState.maxNum
+        || settingsState.startNum < 0
+        || settingsState.maxNum < 0
 
+    const userMessage = settingsState.isEditMode ? `Enter values and press 'set'` : ''
     const increment = () => {
         dispatch(incrementAC(settingsState.maxNum))
     }
     const reset = () => {
-        dispatch(resetCounterToStartValueAC(settingsState.startNum))
+        dispatch(setStartValueAC(settingsState.startNum))
     }
-
-    const userMessage = settingsState.isEditMode ? `Enter values and press 'set'` : ''
 
     return (
         <div className="App">
@@ -37,10 +38,10 @@ function App() {
                     {error ? 'Incorrect value' : settingsState.isEditMode ? userMessage : counterState.count}
                 </Counter>
                 <div className={"Counter_btn_wrapper"}>
-                    <SuperButton disabled={counterState.count ===settingsState.maxNum || !!userMessage}
+                    <SuperButton disabled={counterState.count === settingsState.maxNum || !!userMessage}
                                  name={'Increment'}
                                  callback={increment}/>
-                    <SuperButton disabled={counterState.count ===settingsState.startNum || !!userMessage}
+                    <SuperButton disabled={counterState.count === settingsState.startNum || !!userMessage}
                                  name={'Reset'}
                                  callback={reset}/>
                 </div>
