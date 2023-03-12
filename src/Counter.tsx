@@ -3,7 +3,6 @@ import s from './Counter.module.css'
 
 type CounterPropsType = {
     count: number | boolean
-    startNum: number
     maxNum: number
     displayMessage: string
     children: ReactNode
@@ -12,7 +11,6 @@ type CounterPropsType = {
 
 export const Counter: React.FC<CounterPropsType> = ({
     count,
-    startNum,
     maxNum,
     displayMessage,
     children,
