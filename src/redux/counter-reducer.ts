@@ -1,8 +1,5 @@
-
-
-type ActionsType =
-    ReturnType<typeof incrementAC >
-    | ReturnType<typeof setStartValueAC >
+type ActionsType = ReturnType<typeof incrementAC>
+    | ReturnType<typeof setStartValueAC>
 
 export type CounterStateType = {
     count: number
@@ -14,7 +11,7 @@ const initialState: CounterStateType = {
 }
 
 export const counterReducer = (state: CounterStateType = initialState, action: ActionsType): CounterStateType => {
-    switch(action.type) {
+    switch (action.type) {
         case INCREMENT:
             return state.count < action.payload.maxNum ? {...state, count: state.count += 1} : {...state}
         case SET_START_VALUE:

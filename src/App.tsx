@@ -10,11 +10,9 @@ import {CounterStateType, incrementAC, setStartValueAC} from "./redux/counter-re
 
 
 function App() {
-
     const settingsState = useSelector<AppRootStateType, SettingsStateType>(state => state.settings)
     const counterState = useSelector<AppRootStateType, CounterStateType>(state => state.counter)
     const dispatch = useDispatch()
-
 
     const error = settingsState.startNum >= settingsState.maxNum
         || settingsState.startNum < 0
